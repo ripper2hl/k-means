@@ -1,0 +1,12 @@
+body {
+  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#lienzo{
+    height:400px;
+    width:400px;
+}
