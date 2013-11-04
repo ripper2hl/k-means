@@ -1,7 +1,11 @@
+<!DOCTYPE html>
 <html>
   <head>
-
     <title>k means</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ejemplo de clustering con k-means">
+    <meta name="author" content="Jesus Israel Perales Martinez">
+    <meta charset="utf-8">
     <script src="javascripts/KMeans.js"></script>
     <script src="javascripts/jquery.js"></script>
     <script src="javascripts/handlebars.js"></script>
@@ -13,106 +17,158 @@
   </head>
   <script id="plantilla-tabla-datos" type="text/x-handlebars-template">
     
-    <table class="table table-striped table-bordered table-hover table-responsive">
-      
-	<th>Puntos (datos)</th>
-	<th>x</th>
-	<th>y</th>
+    <div class="panel panel-primary">
+      <div class="panel-heading">Datos: </div>
+
+      <table class="table table-striped table-bordered table-hover table-responsive">
+	<thead>
+	  <tr>
+	    <th>Puntos (datos)</th>
+	    <th>x</th>
+	    <th>y</th>
+	  </tr>
+	</thead>
 	{{#each this}}
 	<tbody>
 	  <tr>
-	    <td>punto {{id}}</td>
+	    <td>punto <span class="badge">{{id}}</span></td>
 	    <td><input type="text" class="puntos form-control" id="{{id}}-x" value="{{x}}" /></td>
 	    <td><input type="text" class="puntos form-control" id="{{id}}-y" value="{{y}}" /></td>
 	  </tr>
 	  {{/each}}
 	</tbody>
-    </table>
-    
+      </table>
+    </div>
   </script>
 
   <script id="plantilla-tabla-centroides" type="text/x-handlebars-template">
-    
-    <table class="table table-striped table-bordered table-hover table-responsive">
-      <th>Centroides</th>
-      <th>x</th>
-      <th>y</th>
-      {{#each this}}
-      <tr>
-	<td>Centroide {{id}}</td>
-	<td><input type="text" class="centroides form-control" id="c{{id}}-x" value="{{x}}" /></td>
-	<td><input type="text" class="centroides form-control" id="c{{id}}-y" value="{{y}}" /></td>
-      </tr>
-      {{/each}}
-    </table>
-    
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">Centroides: </div>
+      
+      <table class="table table-striped table-bordered table-hover table-responsive">
+	<thead>
+	  <tr>
+	    <th>Centroides</th>
+	    <th>x</th>
+	    <th>y</th>
+	  </tr>
+	</thead>
+	{{#each this}}
+	<tbody>
+	  <tr>
+	    <td>Centroide <span class="badge"> {{id}} </span></td>
+	    <td><input type="text" class="centroides form-control" id="c{{id}}-x" value="{{x}}" /></td>
+	    <td><input type="text" class="centroides form-control" id="c{{id}}-y" value="{{y}}" /></td>
+	  </tr>
+	  {{/each}}
+	</tbody>
+      </table>
+    </div>
   </script>
 
   <script id="plantilla-tabla-distancia" type="text/x-handlebars-template">
-    
-    <table class="table table-striped table-bordered table-hover table-responsive">
-      <th>Punto</th>
-      <th>Distancia euclidiana a C1</th>
-      <th>Distancia euclidiana a C2</th>
-      {{#each this}}
-      <tr>
-	<td>({{x}},{{y}})</td>
-	<td>{{distEuC1}}</td>
-	<td>{{distEuC2}}</td>
-      </tr>
-      {{/each}}
-    </table>
-    
-  </script>
 
+    <div class="panel panel-primary">
+      <div class="panel-heading">Distancias euclidianas calculadas: </div>
+      
+      <table class="table table-striped table-bordered table-hover table-responsive">
+	<thead>
+	  <tr>
+	    <th>Punto</th>
+	    <th>Distancia euclidiana a C1</th>
+	    <th>Distancia euclidiana a C2</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  {{#each this}}
+	  <tr>
+	    <td>({{x}},{{y}})</td>
+	    <td>{{distEuC1}}</td>
+	    <td>{{distEuC2}}</td>
+	  </tr>
+	  {{/each}}
+	</tbody>
+      </table>
+    </div>    
+  </script>
+  
   <script id="plantilla-tabla-grupos" type="text/x-handlebars-template">
     
-    <table class="table table-striped table-bordered table-hover table-responsive">
-      <th>Puntos</th>
-      <th>Grupo 1 C1</th>
-      <th>Grupo 2 C2</th>
-      {{#each this}}
-      <tr>
-	<td>Punto {{id}}</td>
-	{{#unless grupo}}
-	<td>({{x}}),({{y}})</td>
-	<td class="text-info" >No pertenece al grupo</td>
-	{{else}}
-	<td class="text-info" >No pertenece al grupo</td>
-	<td>({{x}}),({{y}})</td>
-	{{/unless}}
-      </tr> 
-      {{/each}}
-    </table>
-    
+    <div class="panel panel-primary">
+      <div class="panel-heading">Grupos: </div>
+      
+      <table class="table table-striped table-bordered table-hover table-responsive">
+	<thead>
+	  <tr>
+	    <th>Puntos</th>
+	    <th>Grupo 1 C1</th>
+	    <th>Grupo 2 C2</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  {{#each this}}
+	  <tr>
+	    <td>Punto <span class="badge">{{id}}</span></td>
+	    {{#unless grupo}}
+	    <td>({{x}}),({{y}})</td>
+	    <td class="text-info" >No pertenece al grupo</td>
+	    {{else}}
+	    <td class="text-info" >No pertenece al grupo</td>
+	    <td>({{x}}),({{y}})</td>
+	    {{/unless}}
+	  </tr> 
+	  {{/each}}
+	</tbody>
+      </table>
+    </div>
   </script>
   
   <script id="plantilla-tabla-centroides-recalculados" type="text/x-handlebars-template">
     
-    <table class="table table-striped table-bordered table-hover table-responsive">
-      <th>Centroides</th>
-      <th>x</th>
-      <th>y</th>
-      {{#each this}}
-      <tr>
-	<td>Centroide {{id}}</td>
-	<td>{{x}}</td>
-	<td>{{y}}</td>
-      </tr>
-      {{/each}}
-    </table>
-    
+    <div class="panel panel-success">
+      <div class="panel-heading">Recalculacion de los centroides: </div>
+      
+      <table class="table table-striped table-bordered table-hover table-responsive">
+	<thead>
+	  <tr>
+	    <th>Centroides</th>
+	    <th>x</th>
+	    <th>y</th>
+	</tr>
+	</thead>
+	<tbody>
+	  {{#each this}}
+	  <tr>
+	    <td>Centroide <span class="badge">{{id}}</span></td>
+	    <td>{{x}}</td>
+	    <td>{{y}}</td>
+	  </tr>
+	  {{/each}}
+	</tbody>
+      </table>
+    </div>
   </script>
   
   <body>
     <div class="container" >
       
+      <div class="header">
+
+        <h3 class="text-muted">Sistemas Adaptativos</h3>
+      </div>
       <div class="jumbotron">
-	<h1>k means</h1>
+	
+	<h1>K-means</h1>
+        <p class="lead">Es un metodo de agrupamiento, el agrupamiento es la formacion de grupos por caracteristicas similares, se pueden generar distintos tipos de grupos ya sea por particion, traslape, jerarquico o  difuso.</p>
+     	
 	<address>
-	  <a href="mailto:risa-beat-box@hotmail.com">Jesus Israel Perales Martinez</a>
+	  <a href="mailto:risa-beat-box@hotmail.com"><span class="glyphicon glyphicon-user"></span> Jesus Israel Perales Martinez</a>
 	</address>
-	<button id="ejecutar" class="btn btn-primary" >Calcular</button>
+
+	<button id="ejecutar" class="btn btn-primary"  > <span class="glyphicon glyphicon-play"></span> Calcular</button>
+	<a href="clustering.pdf" target="_blank"><button id="documentacion" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Descargar documentacion  </button> </a>
+
       </div>
       
     </div>

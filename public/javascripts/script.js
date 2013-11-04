@@ -61,13 +61,28 @@ function ejecutar(puntos, centroides){
     return centroides;
 }
 
-$(document).ready(function(){
 
+$(document).ready(function(){
+     
     ejecutar(puntos,centroides);
-    
+
     $("#ejecutar").click( function(e) {
 	
+	$('#tabla-datos').hide(3000);
+	$('#tabla-centroides').hide(3000);
+	$('#tabla-distancia').hide(3000);
+	$('#tabla-centroides').hide(3000);
+	$('#tabla-grupos').hide(3000);
+	$('#tabla-centroides-recalculados').hide(3000);
+	
 	ejecutar(puntos,centroides);
+
+	$('#tabla-datos').show(3000);
+	$('#tabla-centroides').show(3000);
+	$('#tabla-distancia').show(3000);
+	$('#tabla-centroides').show(3000);
+	$('#tabla-grupos').show(3000);
+	$('#tabla-centroides-recalculados').show(3000);
 
     });
 
