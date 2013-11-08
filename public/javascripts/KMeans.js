@@ -46,7 +46,11 @@ function obtenerDist(puntos,centroides){
     return puntos;
 }
 
-/*
+/**************************************HARDCODE************************************************
+ *Deberia preguntar cuantos centroides quiere para asi parametrizar el numero de grupos
+ *requeridos pues por el momento solo acepta 2 grupos por que el ejemplo esta para 2 centroides
+ *esto esta pendiente deberia haber un arreglo de grupos
+
  *Agrega un nuevo valor a la variable puntos para 
  *saber a que grupo de centroide pertenece
  */
