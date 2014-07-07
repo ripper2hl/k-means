@@ -5,7 +5,6 @@
 
 var express = require('express')
   , routes = require('./routes')
-  , user = require('./routes/user')
   , http = require('http')
   , path = require('path');
 
@@ -13,10 +12,9 @@ var app = express();
 
 // all environments
 
-var port = process.env.OPENSHIFT_NODEJS_PORT ||  process.env.OPENSHIFT_INTERNAL_PORT || 8080;
+var port = process.env.OPENSHIFT_NODEJS_PORT ||  process.env.OPENSHIFT_INTERNAL_PORT || 3000;
 var ipaddr = process.env.OPENSHIFT_NODEJS_IP || process.env.OPENSHIFT_INTERNAL_IP;
 app.set('views', __dirname + '/views');
-app.set('view engine', 'jade');
 app.engine('html',require('ejs').renderFile);
 app.use(express.favicon());
 app.use(express.logger('dev'));
@@ -31,9 +29,8 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/users', user.list);
 
 app.listen(port, ipaddr, function() {
 	console.log('%s: Node server started on %s:%d ...', Date(Date.now() ),
-	ipaddr, port); 
+	ipaddr, port);
 });
